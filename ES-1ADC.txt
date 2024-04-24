@@ -1,0 +1,27 @@
+ORG 0;
+ JMP main;
+      ORG 3;
+ JMP ext0ISR;
+      ORG 0BH;
+ JMP timer0ISR;
+      ORG 30H;
+      main: 
+ SETB IT0;
+ SETB EX0;
+ CLR P0.7;
+ MOV TMOD,#2;
+ MOV TH0,#-20;
+ MOV TL0,#-20;
+ SETB TR0;
+ SETB ET0;
+ SETB EA;
+JMP $;
+      timer0ISR:
+ CLR P3.6;
+ SETB P3.6;
+ RETI;
+      ext0ISR:
+ CLR P3.7;
+ MOV P1,P2;
+ SETB P3.7;
+ RETI;

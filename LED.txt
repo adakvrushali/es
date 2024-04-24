@@ -1,0 +1,9 @@
+ MOV TMOD, #02H ;
+ MOV TH0, #0CEH ;
+ MOV TL0, #0CEH ;
+ SETB TR0 ;
+ waitForOverflow:
+ JNB TF0, waitForOverflow ;
+ CLR TF0 ;
+ CPL P1.0 ;
+ JMP waitForOverflow
